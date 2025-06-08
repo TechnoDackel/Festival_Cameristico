@@ -12,7 +12,7 @@ from streamlit_folium import st_folium
 # --- CARICAMENTO ASSETS (LOGO) ---
 # Carica il logo principale del festival
 try:
-    logo_festival = Image.open('Logo_footprint_.jpeg')
+    logo_festival = Image.open('Logo_footprint_.png')
 except FileNotFoundError:
     # Se il file non viene trovato, usa un placeholder testuale
     logo_festival = "🎶"
