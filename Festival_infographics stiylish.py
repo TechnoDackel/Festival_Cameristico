@@ -1006,7 +1006,7 @@ st.markdown("---")
 
 col_left, col_mid, col_right = st.columns([2, 3, 1])
 
-with col_mid:
+with col_left:
     st.caption("Made with ❤️ by Bernardo Sbarro, powered by the finest coffee ☕")
     try:
         # Assicurati che il file 'quarta.jpg' sia nella stessa cartella
