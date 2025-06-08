@@ -24,54 +24,163 @@ st.set_page_config(
     layout="wide",
 )
 
-# --- CSS PERSONALIZZATO PER LO STILE ---
+# --- CSS PERSONALIZZATO ADATTIVO ---
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-/* --- MODIFICA 1: TEMA CHIARO FORZATO --- */
+/* Reset e impostazioni base */
+* {
+    box-sizing: border-box;
+}
+
+/* Stili base per il corpo */
 body {
     font-family: 'Montserrat', sans-serif;
-    color: #2c3e50;
-    background-color: white; /* Forza sfondo bianco */
+    transition: all 0.3s ease;
 }
 
+/* Stili per tema chiaro */
 .stApp {
-    background-color: white; /* Assicura che il contenitore principale sia bianco */
+    background-color: #ffffff;
+    color: #2c3e50;
 }
-/* ----------------------------------------- */
 
-h1, h2, h3 {
+/* Tema scuro */
+@media (prefers-color-scheme: dark) {
+    .stApp {
+        background-color: #1e1e1e !important;
+        color: #ffffff !important;
+    }
+    
+    .stMarkdown {
+        color: #ffffff !important;
+    }
+    
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+        color: #85c1e9 !important;
+    }
+    
+    .stCaption {
+        color: #bdc3c7 !important;
+    }
+    
+    .stInfo {
+        background-color: #34495e !important;
+        color: #ffffff !important;
+    }
+    
+    .stWarning {
+        background-color: #f39c12 !important;
+        color: #ffffff !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background-color: #2c3e50 !important;
+        color: #ffffff !important;
+        border: 1px solid #566573 !important;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #5dade2 !important;
+        color: #ffffff !important;
+    }
+}
+
+/* Tema chiaro */
+@media (prefers-color-scheme: light) {
+    .stApp {
+        background-color: #ffffff !important;
+        color: #2c3e50 !important;
+    }
+    
+    .stMarkdown {
+        color: #2c3e50 !important;
+    }
+    
+    .stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+        color: #1a5276 !important;
+    }
+    
+    .stCaption {
+        color: #34495e !important;
+    }
+    
+    .stInfo {
+        background-color: #f8f9fa !important;
+        color: #2c3e50 !important;
+    }
+    
+    .stWarning {
+        background-color: #fff3cd !important;
+        color: #856404 !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background-color: #ffffff !important;
+        color: #2c3e50 !important;
+        border: 1px solid #dddddd !important;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background-color: #1a5276 !important;
+        color: #ffffff !important;
+    }
+}
+
+/* Fallback per browser che non supportano prefers-color-scheme */
+.stApp {
+    background-color: #ffffff;
+    color: #2c3e50;
+}
+
+.stMarkdown {
+    color: #2c3e50;
+}
+
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3, .stMarkdown h4, .stMarkdown h5, .stMarkdown h6 {
+    color: #1a5276;
+    font-weight: 700;
+}
+
+/* Titoli */
+h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     color: #1a5276;
 }
 
+/* Streamlit tabs */
 .stTabs [data-baseweb="tab-list"] {
-	gap: 24px;
+    gap: 24px;
 }
 
 .stTabs [data-baseweb="tab"] {
-	height: 50px;
+    height: 50px;
     white-space: pre-wrap;
-	background-color: transparent;
-	border-radius: 4px 4px 0px 0px;
-	gap: 1px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    background-color: transparent;
+    border-radius: 4px 4px 0px 0px;
+    gap: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #2c3e50;
+    border: 1px solid #dddddd;
 }
 
 .stTabs [aria-selected="true"] {
-    background-color: #1a5276;
-    color: white;
+    background-color: #1a5276 !important;
+    color: white !important;
 }
 
+/* Container metriche */
 .metric-container {
-    background-color: #f2f3f4;
+    background-color: #ffffff;
     border-left: 10px solid #1a5276;
     padding: 2rem;
     border-radius: 10px;
     text-align: center;
     margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dddddd;
 }
 
 .metric-value {
@@ -86,55 +195,25 @@ h1, h2, h3 {
     color: #2c3e50;
 }
 
-blockquote {
-    border-left: 5px solid #bdc3c7;
-    padding-left: 1.5rem;
-    margin-left: 0;
-    font-style: italic;
-    color: #34495e;
-}
-
-/* Stile per la tabella HTML */
-.styled-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 20px;
-    font-size: 0.9em;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-.styled-table thead tr {
-    background-color: #1a5276;
-    color: #ffffff;
-    text-align: left;
-}
-.styled-table th, .styled-table td {
-    padding: 12px 15px;
-    border: 1px solid #dddddd;
-}
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #1a5276;
-}
-
+/* Container per quattro metriche */
 .four-metric-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .single-metric {
-    background-color: #f2f3f4;
+    background-color: #ffffff;
     border-left: 10px solid #1a5276;
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
     flex: 1;
-    margin: 0 0.5rem;
+    min-width: 200px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dddddd;
 }
 
 .single-metric-value {
@@ -150,22 +229,323 @@ blockquote {
     margin-top: 0.5rem;
 }
 
+/* Tema scuro per metriche */
+@media (prefers-color-scheme: dark) {
+    .metric-container, .single-metric {
+        background-color: #34495e !important;
+        border-color: #5dade2 !important;
+        border-left-color: #5dade2 !important;
+    }
+    
+    .metric-value, .single-metric-value {
+        color: #5dade2 !important;
+    }
+    
+    .metric-label, .single-metric-label {
+        color: #ffffff !important;
+    }
+}
+
+/* Responsive per mobile */
+@media (max-width: 768px) {
+    .four-metric-container {
+        flex-direction: column;
+    }
+    
+    .single-metric {
+        margin-bottom: 1rem;
+        min-width: unset;
+    }
+    
+    .single-metric-value {
+        font-size: 2rem;
+    }
+    
+    .metric-value {
+        font-size: 3rem;
+    }
+}
+
+/* Blockquote */
+blockquote {
+    border-left: 5px solid #1a5276;
+    padding-left: 1.5rem;
+    margin-left: 0;
+    font-style: italic;
+    color: #34495e;
+    background-color: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-radius: 0 5px 5px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    blockquote {
+        border-left-color: #5dade2;
+        color: #bdc3c7;
+        background-color: #34495e;
+    }
+}
+
+/* Tabella stilizzata */
+.styled-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 0.9em;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.styled-table thead tr {
+    background-color: #1a5276;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+    color: #2c3e50;
+}
+
+.styled-table thead th {
+    color: #ffffff;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: #ffffff;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #1a5276;
+}
+
+/* Tema scuro per tabelle */
+@media (prefers-color-scheme: dark) {
+    .styled-table {
+        background-color: #34495e;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .styled-table thead tr {
+        background-color: #5dade2;
+        color: #ffffff;
+    }
+    
+    .styled-table th, .styled-table td {
+        border-color: #566573;
+        color: #ffffff;
+    }
+    
+    .styled-table tbody tr {
+        border-color: #566573;
+        background-color: #34495e;
+    }
+    
+    .styled-table tbody tr:nth-of-type(even) {
+        background-color: #2c3e50;
+    }
+    
+    .styled-table tbody tr:last-of-type {
+        border-bottom-color: #5dade2;
+    }
+}
+
+/* Card sponsor */
 .sponsor-card {
-    background: white;
+    background: #ffffff;
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin: 0.5rem;
+    border: 1px solid #dddddd;
 }
 
-/* --- MODIFICA 2: CORREZIONE SPAZIO SOTTO LA MAPPA --- */
+.sponsor-card h4 {
+    color: #1a5276;
+    margin-bottom: 0.5rem;
+}
+
+.sponsor-card p {
+    color: #34495e;
+    margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .sponsor-card {
+        background-color: #34495e;
+        border-color: #566573;
+    }
+    
+    .sponsor-card h4 {
+        color: #5dade2;
+    }
+    
+    .sponsor-card p {
+        color: #bdc3c7;
+    }
+}
+
+/* Fix per iframe mappa */
 iframe {
-    display: block; /* Consigliato per elementi iframe */
-    margin-bottom: 0 !important; /* Rimuove lo spazio vuoto sotto la mappa */
+    display: block;
+    margin-bottom: 0 !important;
+    border-radius: 8px;
 }
-/* ---------------------------------------------------- */
 
+/* Lista non ordinata */
+ul, ol {
+    color: #2c3e50;
+}
+
+ul li, ol li {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    ul, ol, ul li, ol li {
+        color: #ffffff;
+    }
+}
+
+/* Small text */
+small {
+    color: #34495e;
+}
+
+@media (prefers-color-scheme: dark) {
+    small {
+        color: #bdc3c7;
+    }
+}
+
+/* Stili per i link */
+a {
+    color: #3498db;
+}
+
+a:hover {
+    color: #1a5276;
+}
+
+@media (prefers-color-scheme: dark) {
+    a {
+        color: #85c1e9;
+    }
+    
+    a:hover {
+        color: #5dade2;
+    }
+}
+
+/* Footer styling */
+.footer-container {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-top: 2rem;
+    border: 1px solid #dddddd;
+}
+
+.footer-container h3 {
+    color: #1a5276;
+}
+
+.footer-container p {
+    color: #2c3e50;
+}
+
+@media (prefers-color-scheme: dark) {
+    .footer-container {
+        background-color: #34495e;
+        border-color: #566573;
+    }
+    
+    .footer-container h3 {
+        color: #5dade2;
+    }
+    
+    .footer-container p {
+        color: #ffffff;
+    }
+}
+
+/* Separatori */
+hr {
+    border-color: #dddddd;
+    opacity: 0.5;
+}
+
+@media (prefers-color-scheme: dark) {
+    hr {
+        border-color: #566573;
+    }
+}
+
+/* Media query per schermi molto piccoli */
+@media (max-width: 480px) {
+    .single-metric-value {
+        font-size: 1.8rem;
+    }
+    
+    .single-metric-label {
+        font-size: 0.9rem;
+    }
+    
+    .styled-table {
+        font-size: 0.8em;
+    }
+    
+    .styled-table th, .styled-table td {
+        padding: 8px 10px;
+    }
+}
+
+/* Assicurati che i grafici Plotly si adattino al tema */
+.js-plotly-plot .plotly .modebar {
+    background: transparent !important;
+}
+
+/* Stile per elementi di Streamlit che potrebbero non rispettare il tema */
+.element-container {
+    color: inherit;
+}
+
+.stDataFrame {
+    background-color: transparent;
+}
+
+.stDataFrame table {
+    background-color: transparent;
+}
+
+/* Forza il tema sui componenti specifici */
+@media (prefers-color-scheme: dark) {
+    .stDataFrame table {
+        background-color: #34495e !important;
+        color: #ffffff !important;
+    }
+    
+    .stDataFrame th {
+        background-color: #5dade2 !important;
+        color: #ffffff !important;
+    }
+    
+    .stDataFrame td {
+        background-color: #34495e !important;
+        color: #ffffff !important;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -225,8 +605,6 @@ with col_title:
 
 st.markdown("### Impatto, portata e opportunità di un evento culturale in crescita esponenziale")
 st.markdown("---")
-
-
 
 # --- SEZIONE 1: PREVISIONI DI IMPATTO 2025 ---
 st.header("1. Previsioni di Impatto per il 2025")
@@ -305,7 +683,10 @@ with tab1:
     fig_audience.update_layout(
         xaxis=dict(tickmode='linear'),
         yaxis_title="Pubblico in Presenza",
-        height=400
+        height=400,
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='#2c3e50')
     )
     st.plotly_chart(fig_audience, use_container_width=True)
 
@@ -325,7 +706,10 @@ with tab1:
     fig_reach.update_layout(
         xaxis=dict(tickmode='linear'),
         yaxis_title="Copertura Social (Utenti)",
-        height=400
+        height=400,
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='#2c3e50')
     )
     st.plotly_chart(fig_reach, use_container_width=True)
 
@@ -358,7 +742,10 @@ with tab2:
         xaxis_title='Anno',
         yaxis_title='Utenti Raggiunti',
         barmode='group',
-        height=400
+        height=400,
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        font=dict(color='#2c3e50')
     )
 
     st.plotly_chart(fig_platform, use_container_width=True)
@@ -447,21 +834,17 @@ st.markdown("Il festival è reso possibile grazie al supporto di partner istituz
 
 col1, col2, col3, col4 = st.columns(4)
 
-
-
 with col1:
     try:
         st.image("./Regione_Puglia.jpg", width=200)
     except:
         st.warning("Logo Regione Puglia mancante")
 
-
 with col2:
     try:
         st.image("./SIAE_logo.png", width=240)
     except:
         st.warning("Logo SIAE mancante")
-
 
 with col3:
     st.markdown("""
@@ -510,8 +893,8 @@ with st.container():
                 <td>600 €</td>
                 <td>1.500 €</td>
                 <td>2.500 €</td>
-                <td rowspan="2" style="text-align:center; vertical-align:middle; background-color:#f8f9fa;"><b>5.000 €</b></td>
-                <td rowspan="2" style="text-align:center; vertical-align:middle; background-color:#fff3cd;"><b>10.000 €</b></td>
+                <td rowspan="2" style="text-align:center; vertical-align:middle; background-color:var(--bg-secondary);"><b>5.000 €</b></td>
+                <td rowspan="2" style="text-align:center; vertical-align:middle; background-color:var(--bg-secondary);"><b>10.000 €</b></td>
            </tr>
             <tr>
                 <td><b>Masterclass</b></td>
@@ -561,6 +944,8 @@ with col2:
     - Incentivano follow e condivisioni
     - Trackable per ROI measurement
     """)
+
+# --- FOOTER ---
 
 # --- FOOTER ---
 st.markdown("---")
