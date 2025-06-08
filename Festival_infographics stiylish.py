@@ -29,10 +29,17 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+/* --- MODIFICA 1: TEMA CHIARO FORZATO --- */
 body {
     font-family: 'Montserrat', sans-serif;
     color: #2c3e50;
+    background-color: white; /* Forza sfondo bianco */
 }
+
+.stApp {
+    background-color: white; /* Assicura che il contenitore principale sia bianco */
+}
+/* ----------------------------------------- */
 
 h1, h2, h3 {
     font-weight: 700;
@@ -151,6 +158,13 @@ blockquote {
     text-align: center;
     margin: 0.5rem;
 }
+
+/* --- MODIFICA 2: CORREZIONE SPAZIO SOTTO LA MAPPA --- */
+iframe {
+    display: block; /* Consigliato per elementi iframe */
+    margin-bottom: 0 !important; /* Rimuove lo spazio vuoto sotto la mappa */
+}
+/* ---------------------------------------------------- */
 
 </style>
 """, unsafe_allow_html=True)
@@ -411,7 +425,7 @@ for city, coord in locations_potential.items():
     ).add_to(m)
 
 # Visualizzazione della mappa in Streamlit
-st_folium(m, use_container_width=True, height=450)
+st_folium(m, use_container_width=True, height=500)
 st.markdown("""
 <ul>
     <li><span style="color:red;">📍</span> <b>Pin Rossi</b>: Comuni che ospiteranno gli eventi del 2025. </li>
