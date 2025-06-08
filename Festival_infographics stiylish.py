@@ -1008,16 +1008,8 @@ col_left, col_mid, col_right = st.columns([2, 3, 1])
 
 with col_mid:
     st.caption("Made with ❤️ by Bernardo Sbarro, powered by the finest coffee ☕")
-
     try:
         # Assicurati che il file 'quarta.jpg' sia nella stessa cartella
         st.image("quarta.png", width=75)
     except FileNotFoundError:
         st.caption("_(Logo Quarta Caffè mancante)_")
-        
-        
-        
-        
-        
-        
-        
