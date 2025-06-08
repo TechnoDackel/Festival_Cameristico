@@ -16,6 +16,13 @@ try:
 except FileNotFoundError:
     # Se il file non viene trovato, usa un placeholder testuale
     logo_festival = "🎶"
+    
+# Carica il logo di Quarta    
+try:
+    quarta_logo_base64 = Image.open('quarta.png')
+except FileNotFoundError:
+    quarta_logo_base64 = None
+    
 
 # --- IMPOSTAZIONI PAGINA ---
 st.set_page_config(
@@ -546,6 +553,35 @@ hr {
         color: #ffffff !important;
     }
 }
+
+/* --- FOOTER FINALE STILIZZATO --- */
+.final-footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    background-color: var(--secondary-background-color);
+    border-radius: 10px;
+}
+
+.final-footer .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Spazio tra testo e logo */
+    flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
+}
+
+.final-footer .footer-text {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.final-footer .footer-logo {
+    max-height: 45px; /* Altezza del logo partner */
+    opacity: 0.9;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -624,7 +660,7 @@ with col1:
 with col2:
     st.markdown("""
     <div class="single-metric">
-        <div class="single-metric-value">2.2M</div>
+        <div class="single-metric-value">2.2 Mln</div>
         <div class="single-metric-label">📱 Copertura Digitale</div>
         <small style="color: #27ae60;">+23.4% vs 2024</small>
     </div>
@@ -971,11 +1007,17 @@ st.markdown("---")
 col_left, col_mid, col_right = st.columns([2, 3, 1])
 
 with col_mid:
-    st.caption("Made with ❤️ by Bernardo Sbarro, powered by the finest coffee ☕")
+    st.caption("Made with ❤️ by Bernardo Sbarro, powered by the finest coffee ☕")
 
-with col_right:
-    try:
-        # Assicurati che il file 'quarta.jpg' sia nella stessa cartella
-        st.image("quarta.jpg", width=75)
-    except FileNotFoundError:
-        st.caption("_(Logo Quarta Caffè mancante)_")
+    try:
+        # Assicurati che il file 'quarta.jpg' sia nella stessa cartella
+        st.image("quarta.png", width=75)
+    except FileNotFoundError:
+        st.caption("_(Logo Quarta Caffè mancante)_")
+        
+        
+        
+        
+        
+        
+        
